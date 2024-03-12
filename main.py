@@ -7,4 +7,4 @@ if __name__ == '__main__':
 
     best_params_RF = ca.optimise_model('RandomForestClassifier', n_estimators=[5], min_samples_leaf=[1,2])
     model_RF = ca.get_model('RandomForestClassifier', **best_params_RF)
-    ca.save_obj_as_pickle(model_RF, 'saved_data/best_model_RF')
+    ca.save_obj_as_pickle(model_RF, 'saved_data/best_model_RF.pkl')
