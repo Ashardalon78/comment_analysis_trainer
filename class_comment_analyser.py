@@ -19,6 +19,7 @@ class CommmentAnalyser():
         #self.df_main = self.load_obj_from_pickle('saved_data/df_main.pkl')
 
         self.prepare_samples()
+        self.save_obj_as_pickle(self.cv, 'saved_data/cv.pkl')
 
         # model_NB =self.get_model(MultinomialNB)
         # print(model_NB)
@@ -27,7 +28,7 @@ class CommmentAnalyser():
         # self.best_params_RF = self.optimise_model(RandomForestClassifier, n_estimators=[5], min_samples_leaf=[1,2])
         # model_RF = self.get_model(RandomForestClassifier, **self.best_params_RF)
         #
-        # self.save_obj_as_pickle(model_RF, 'saved_data/best_model_RF')
+        # self.save_obj_as_pickle(model_RF, 'saved_data/best_model_RF.pkl')
 
         # with open('saved_data/best_model_RF', 'rb') as filein:
         #     tmp_model = pickle.load(filein)
@@ -110,11 +111,11 @@ class CommmentAnalyser():
 
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, random_state=0)
 
-        cv = CountVectorizer()
-        cv.fit(self.X_train)
+        self.cv = CountVectorizer()
+        self.cv.fit(self.X_train)
 
-        self.X_train = cv.transform(self.X_train)
-        self.X_test = cv.transform(self.X_test)
+        self.X_train = self.cv.transform(self.X_train)
+        self.X_test = self.cv.transform(self.X_test)
 
     def get_model(self, estimator, **hyperparams):
         if type(estimator) == str:
